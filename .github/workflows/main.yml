@@ -22,7 +22,7 @@ jobs:
       run: composer install
 
     - name: Fetch and save data
-      run: php src/fetch_software.php
+      run: php src/fetch_software.php b0w8ldo0j ruoshui 1
 
     - name: Commit and push data
       run: |
