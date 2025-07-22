@@ -1,6 +1,5 @@
 <?php
 require 'vendor/autoload.php'; // 引入Composer自动加载文件
-require 'simple_html_dom.php'; // HTML解析
 require 'lanzouyunapi.php'; // 引入本地的API文件
 
 // 设置默认参数
