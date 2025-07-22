@@ -1,7 +1,7 @@
 <?php
 require 'vendor/autoload.php'; // 引入Composer自动加载文件
 require 'simple_html_dom.php'; // HTML解析
-include "lanzouyunapiconfig.php"; // 配置文件
+require 'lanzouyunapi.php'; // 引入本地的API文件
 
 // 设置默认参数
 $data = [
@@ -23,10 +23,13 @@ if (isset($argv[3])) {
     $data['page'] = $argv[3];
 }
 
-function fetchPage($apiUrl, $data) {
-    $client = new \GuzzleHttp\Client();
-    $response = $client->request('GET', $apiUrl, ['query' => $data]);
-    return json_decode($response->getBody(), true);
+function fetchPage($data) {
+    // 模拟GET请求
+    $_GET = $data;
+    ob_start(); // 开始输出缓冲
+    include 'lanzouyunapi.php'; // 包含API文件
+    $output = ob_get_clean(); // 获取缓冲区内容
+    return json_decode($output, true); // 解码JSON响应
 }
 
 function saveData($data, $filePath) {
@@ -38,7 +41,7 @@ $currentPage = 1;
 
 do {
     $data['page'] = $currentPage;
-    $response = fetchPage($apiUrl, $data);
+    $response = fetchPage($data);
     if ($response['code'] == 0) {
         $allData[] = $response['data'];
         $currentPage++;
