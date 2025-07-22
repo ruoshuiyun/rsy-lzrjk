@@ -20,19 +20,18 @@ jobs:
 
       - name: Install dependencies
         run: composer install
-        working-directory: ./  # 根据你的项目结构调整路径
+        working-directory: ./  # 确保这是你的项目根目录
 
-      - name: Run PHP Script
-        run: php lanzouyunapi.php
-        working-directory: ./  # 根据你的项目结构调整路径
+      - name: Run PHP Script and capture output
+        run: php lanzouyunapi.php > output.json
+        working-directory: ./  # 确保这是你的项目根目录
         env:
           REDIRECT: false  # 设置环境变量，根据需要调整
           TYPES: json      # 设置返回类型为 JSON
-        id: run_script
 
-      - name: Save output to file
-        run: echo "${{ steps.run_script.outputs.stdout }}" > output.json
-        working-directory: ./  # 输出文件保存路径
+      - name: Check output file content
+        run: cat output.json
+        working-directory: ./  # 确保这是你的项目根目录
 
       - name: Commit and push output file
         run: |
