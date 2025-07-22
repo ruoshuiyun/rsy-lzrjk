@@ -3,31 +3,31 @@
     "description": "API for Lanzou Cloud (蓝奏云)",
     "type": "project",
     "require": {
-        "php": "^7.4 || ^8.0",  // 指定 PHP 版本要求
-        "symfony/http-client": "^5.3",  // 用于 HTTP 请求
-        "symfony/dom-crawler": "^5.3",  // 用于 HTML 解析
-        "symfony/css-selector": "^5.3"  // 用于选择 HTML 元素
+        "php": "^7.4 || ^8.0", 
+        "symfony/http-client": "^5.3", 
+        "symfony/dom-crawler": "^5.3", 
+        "symfony/css-selector": "^5.3" 
     },
     "require-dev": {
-        "phpunit/phpunit": "^9.5"  // 用于单元测试
+        "phpunit/phpunit": "^9.5" 
     },
     "autoload": {
         "psr-4": {
-            "Lanzouyun\\": "src/"  // 自动加载命名空间和目录映射
+            "Lanzouyun\\": "src/" 
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Lanzouyun\\Tests\\": "tests/"  // 测试文件的自动加载
+            "Lanzouyun\\Tests\\": "tests/" 
         }
     },
     "scripts": {
-        "test": "vendor/bin/phpunit"  // 定义测试脚本
+        "test": "vendor/bin/phpunit" 
     },
     "config": {
-        "optimize-autoloader": true,  // 优化自动加载器
-        "sort-packages": true  // 按字母排序依赖
+        "optimize-autoloader": true,  
+        "sort-packages": true 
     },
-    "minimum-stability": "stable",  // 最小稳定性要求
-    "prefer-stable": true  // 优先使用稳定版本
+    "minimum-stability": "stable", 
+    "prefer-stable": true 
 }
