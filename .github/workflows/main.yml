@@ -2,7 +2,7 @@ name: Run PHP Script
 
 on:
   schedule:
-    - cron: ' 0 0 */3 * *'  # 每三天午夜运行
+    - cron: '0 0 * * *'  # 每天午夜运行
   workflow_dispatch:  # 也可以手动触发
 
 jobs:
@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # 确保可以访问所有分支
 
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
@@ -33,10 +35,15 @@ jobs:
         run: cat output.json
         working-directory: ./  # 确保这是你的项目根目录
 
-      - name: Commit and push output file
+      - name: Checkout or create target branch
+        run: |
+          git checkout -B output-branch  # 切换到目标分支，如果不存在则创建
+          git pull origin output-branch --allow-unrelated-histories || true  # 拉取目标分支的最新内容
+
+      - name: Commit and push output file to target branch
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add output.json
           git commit -m "Update output file" || echo "No changes to commit"
-          git push origin HEAD
+          git push origin output-branch
