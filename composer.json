@@ -3,8 +3,8 @@
     "description": "A project to fetch data from Lanzouyun using a local API script",
     "type": "project",
     "require": {
-        "php": "^7.4 || ^8.0", // 支持PHP 7.4和8.0
-        "guzzlehttp/guzzle": "^7.0" // 用于HTTP请求（可选）
+        "php": "^7.4 || ^8.0", 
+        "guzzlehttp/guzzle": "^7.0"
     },
     "autoload": {
         "psr-4": {
