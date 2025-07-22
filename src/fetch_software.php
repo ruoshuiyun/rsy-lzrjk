@@ -4,7 +4,7 @@ require 'lanzouyunapi.php'; // 引入本地的API文件
 
 // 设置默认参数
 $data = [
-    'data' => 'b0w8ldo0j', // 替换为你的网盘ID
+    'data' => 'https://lanzoui.com/b0w8ldo0j', // 替换为你的网盘ID
     'pw' => 'ruoshui', // 替换为你的网盘密码
     'types' => 'json',
     'auto' => 1,
