@@ -1,5 +1,5 @@
 {
-    "name": "your-vendor-name/lanzouyun-api",
+    "name": "ruoshuiyun/apijg",
     "description": "A project to fetch data from Lanzouyun using a local API script",
     "type": "project",
     "require": {
