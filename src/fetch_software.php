@@ -1,28 +1,32 @@
 <?php
 require 'vendor/autoload.php'; // 引入Composer自动加载文件
-require 'lanzouyunapi.php'; // 引入本地的API文件
+require 'simple_html_dom.php'; // HTML解析
+include "lanzouyunapiconfig.php"; // 配置文件
 
-// 定义你的网盘ID和密码
+// 设置默认参数
 $data = [
-    'data' => 'b0w8ldo0j', // 网盘ID
-    'pw' => 'ruoshui', // 网盘密码
+    'data' => 'b0w8ldo0j', // 替换为你的网盘ID
+    'pw' => 'ruoshui', // 替换为你的网盘密码
     'types' => 'json',
     'auto' => 1,
     'page' => 1
 ];
 
-function fetchPage($data) {
-    // 调用本地的API文件
-    return requestApi($data);
+// 检查是否有命令行参数覆盖默认值
+if (isset($argv[1])) {
+    $data['data'] = $argv[1];
+}
+if (isset($argv[2])) {
+    $data['pw'] = $argv[2];
+}
+if (isset($argv[3])) {
+    $data['page'] = $argv[3];
 }
 
-function requestApi($data) {
-    // 模拟GET请求
-    $_GET = $data;
-    ob_start(); // 开始输出缓冲
-    include 'lanzouyunapi.php'; // 包含API文件
-    $output = ob_get_clean(); // 获取缓冲区内容
-    return json_decode($output, true); // 解码JSON响应
+function fetchPage($apiUrl, $data) {
+    $client = new \GuzzleHttp\Client();
+    $response = $client->request('GET', $apiUrl, ['query' => $data]);
+    return json_decode($response->getBody(), true);
 }
 
 function saveData($data, $filePath) {
@@ -34,7 +38,7 @@ $currentPage = 1;
 
 do {
     $data['page'] = $currentPage;
-    $response = fetchPage($data);
+    $response = fetchPage($apiUrl, $data);
     if ($response['code'] == 0) {
         $allData[] = $response['data'];
         $currentPage++;
