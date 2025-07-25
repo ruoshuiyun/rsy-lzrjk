@@ -1,0 +1,11 @@
+{
+	"name": "若水软件库",
+	"package": "com.ruoshui.appstore.lz",
+	"data": {
+		"update": {
+			"version": "0.11.0",
+			"content": "测试版本",
+			"force": false
+		}
+	}
+}
